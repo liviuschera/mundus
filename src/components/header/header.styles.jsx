@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const HeaderWrapper = styled.header`
-  background-color: var(--background-color);
+  background-color: var(--elements-color);
   padding: 2rem 5rem;
   display: flex;
   justify-content: space-between;
@@ -14,21 +14,20 @@ export const Heading = styled.h1`
 `;
 
 export const ThemeSwitcher = styled.button`
-  /* line-height: 100%; */
-  /* text-decoration: none; */
+  color: inherit;
   border: none;
   outline: none;
   cursor: pointer;
   background-color: transparent;
-
-  /* width: 3rem; */
-  height: 3rem;
-  border-radius: 3rem;
+  height: 3.5rem;
+  font-size: inherit;
+  font-weight: 400;
+  border-radius: 0.5rem;
   padding: 0 1rem;
-  transition: all 300ms;
+  transition: all 500ms;
 
   &:hover {
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.1rem 2rem rgba(0, 0, 0, 0.2);
     background-color: var(--input-color);
     transform: translateY(-0.2rem);
     color: var(--background-color);

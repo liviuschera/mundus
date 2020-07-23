@@ -3,12 +3,15 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
 :root {
   --background-color: ${(props) =>
-    props.darkTheme ? props.theme.dark.elements : props.theme.light.elements};;
+    props.darkTheme
+      ? props.theme.dark.background
+      : props.theme.light.background};;
   --text-color: ${(props) =>
     props.darkTheme ? props.theme.dark.text : props.theme.light.text};
   --elements-color: ${(props) =>
     props.darkTheme ? props.theme.dark.elements : props.theme.light.elements};
-    --input-color: hsl(0, 0%, 52%)
+    --input-color: ${(props) =>
+      props.darkTheme ? props.theme.dark.input : props.theme.light.input}
 }
 
 *,
@@ -25,8 +28,6 @@ html {
    /* This defines what 1rem is */
    /* 1 rem = 10px; 10px/16px = 62.5% */
    font-size: 62.5%;
-  /* background: var(--background-color); */
-  color: var(--text-color);
 
 body {
    font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -34,11 +35,7 @@ body {
     font-weight: 300;
     font-size: 1.6rem;
     line-height: 2;
+    color: var(--text-color);
     box-sizing: border-box;
 }
-
-.container {
-  max-width: 144rem;
-  padding: 1rem;
-  background: var(--background-color);
 `;
