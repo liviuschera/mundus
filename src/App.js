@@ -5,7 +5,7 @@ import { GlobalStyle } from './global.styles.js';
 import ThemeContext from './contexts/theme.context';
 
 import themeConfig from './theme-config.styles';
-
+import Header from './components/header/header.component';
 import Homepage from './pages/homepage.component';
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
       <ThemeContext.Provider value={value}>
         <ThemeProvider theme={themeConfig}>
           <GlobalStyle darkTheme={theme} />
+          <Header />
           <Homepage />
         </ThemeProvider>
       </ThemeContext.Provider>

@@ -8,7 +8,7 @@ export default function CountryCardList({ countries }) {
   return (
     <CountryCardListWrapper>
       {countries.map((country) => (
-        <CountryCard country={country} />
+        <CountryCard key={country.name} country={country} />
       ))}
     </CountryCardListWrapper>
   );

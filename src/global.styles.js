@@ -21,7 +21,6 @@ export const GlobalStyle = createGlobalStyle`
   padding: 0;
   box-sizing: inherit;
   text-decoration: none;
-  /* color: hsl(188, 90%, 10%); */
 }
 
 html {
@@ -37,5 +36,6 @@ body {
     line-height: 2;
     color: var(--text-color);
     box-sizing: border-box;
+     background-color: var(--background-color);
 }
 `;

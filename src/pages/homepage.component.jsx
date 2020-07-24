@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { HomepageWrapper } from './homepage.styles';
 
 import connectToAPI from '../utils/connect-to-api';
-import Header from '../components/header/header.component';
+
 import CountryCardList from '../components/country-card-list/country-card-list.component';
 
 export default function Homepage(params) {
@@ -28,7 +28,6 @@ export default function Homepage(params) {
 
   return (
     <HomepageWrapper>
-      <Header />
       <CountryCardList countries={countries} />
     </HomepageWrapper>
   );

@@ -6,6 +6,7 @@ export const HeaderWrapper = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* position: absolute; */
 `;
 
 export const Heading = styled.h1`

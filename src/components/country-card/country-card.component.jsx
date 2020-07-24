@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-  CountryCardWrapper,
+  CardWrapper,
   DetailsContainer,
   Flag,
   Name,
@@ -10,7 +10,7 @@ import {
 
 export default function CountryCard({ country }) {
   return (
-    <CountryCardWrapper>
+    <CardWrapper>
       <Flag>
         <img src={country.flag} alt="" />
       </Flag>
@@ -29,6 +29,6 @@ export default function CountryCard({ country }) {
           {country.capital}
         </Info>
       </DetailsContainer>
-    </CountryCardWrapper>
+    </CardWrapper>
   );
 }
