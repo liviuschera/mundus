@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { HomepageWrapper } from './homepage.styles';
 
 import connectToAPI from '../utils/connect-to-api';
-
+import SearchForm from '../components/search-form/search-form.component';
 import CountryCardList from '../components/country-card-list/country-card-list.component';
 
 export default function Homepage(params) {
@@ -28,6 +28,7 @@ export default function Homepage(params) {
 
   return (
     <HomepageWrapper>
+      <SearchForm></SearchForm>
       <CountryCardList countries={countries} />
     </HomepageWrapper>
   );

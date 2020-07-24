@@ -2,6 +2,6 @@ import styled from 'styled-components';
 
 export const HomepageWrapper = styled.main`
   max-width: 120rem;
-  margin: 3rem auto 0;
+  margin: 0 auto;
   padding: 3rem;
 `;
