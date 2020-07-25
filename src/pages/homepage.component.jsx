@@ -8,28 +8,31 @@ import CountryCardList from '../components/country-card-list/country-card-list.c
 
 export default function Homepage(params) {
   const [countries, setCountries] = useState([]);
+  const [inputCountry, setInputCountry] = useState('');
 
   async function getCountries() {
-    const response = await fetch('https://restcountries.eu/rest/v2/name/r');
-    const data = await response.json();
-    console.log(data);
-  }
-  useEffect(() => {
-    // getCountries();
     (async function (params) {
       const resp = await connectToAPI(
-        'https://restcountries.eu/rest/v2/name/ro',
+        'https://restcountries.eu/rest/v2/all',
         'GET'
       );
       setCountries(resp);
       console.log(resp);
     })();
+  }
+
+  function onInputChange(event) {
+    setInputCountry(event.target.value);
+  }
+
+  useEffect(() => {
+    getCountries();
   }, []);
 
   return (
     <HomepageWrapper>
-      <SearchForm></SearchForm>
-      <CountryCardList countries={countries} />
+      <SearchForm onInputChange={onInputChange} countries={countries} />
+      <CountryCardList countries={countries} inputCountry={inputCountry} />
     </HomepageWrapper>
   );
 }

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const CardWrapper = styled.div`
   font-size: 1.3rem;
-  height: 30rem;
+  height: max-content;
   border-radius: 0.5rem;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
   overflow: hidden;

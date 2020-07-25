@@ -4,12 +4,16 @@ import { CountryCardListWrapper } from './country-card-list.styles';
 
 import CountryCard from '../country-card/country-card.component';
 
-export default function CountryCardList({ countries }) {
+export default function CountryCardList({ countries, inputCountry }) {
+  const filteredCountries = countries.filter((country) =>
+    country.name.toLowerCase().includes(inputCountry.toLowerCase())
+  );
+
   return (
     <CountryCardListWrapper>
-      {countries.map((country) => (
-        <CountryCard key={country.name} country={country} />
-      ))}
+      {filteredCountries.map((country) => {
+        return <CountryCard key={country.name} country={country} />;
+      })}
     </CountryCardListWrapper>
   );
 }
