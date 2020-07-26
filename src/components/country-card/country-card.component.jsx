@@ -16,18 +16,20 @@ export default function CountryCard({ country }) {
       </Flag>
       <DetailsContainer>
         <Name>{country.name}</Name>
-        <Info>
-          <span>Population: </span>
-          {country.population}
-        </Info>
-        <Info>
-          <span>Region: </span>
-          {country.region}
-        </Info>
-        <Info>
-          <span>Capital: </span>
-          {country.capital}
-        </Info>
+        <div>
+          <Info>
+            <span>Population: </span>
+            {country.population}
+          </Info>
+          <Info>
+            <span>Region: </span>
+            {country.region}
+          </Info>
+          <Info>
+            <span>Capital: </span>
+            {country.capital}
+          </Info>
+        </div>
       </DetailsContainer>
     </CardWrapper>
   );

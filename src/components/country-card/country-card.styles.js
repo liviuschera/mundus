@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const CardWrapper = styled.div`
   font-size: 1.3rem;
-  height: max-content;
+  height: 35rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -12,6 +12,10 @@ export const CardWrapper = styled.div`
 
 export const DetailsContainer = styled.div`
   padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 50%;
 `;
 
 export const Flag = styled.div`

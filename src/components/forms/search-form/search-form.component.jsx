@@ -1,18 +1,18 @@
 import React from 'react';
 
-import { Form } from './search-form.styles';
-import FormInput from '../form-input/form-input.component';
+import { FormWrapper } from './search-form.styles';
+import Input from '../input/input.component';
 
 export default function SearchForm({ onInputChange, inputCountry }) {
   return (
-    <Form>
-      <FormInput
+    <FormWrapper>
+      <Input
         type="search"
         name="search-country"
         placeholder="Search for a country..."
         value={inputCountry}
         onChange={onInputChange}
       />
-    </Form>
+    </FormWrapper>
   );
 }
