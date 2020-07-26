@@ -2,14 +2,20 @@ import React, { useEffect, useState } from 'react';
 
 import { HomepageWrapper, FormSection } from './homepage.styles';
 
-import connectToAPI from '../utils/connect-to-api';
 import SearchForm from '../components/forms/search-form/search-form.component';
 import SelectForm from '../components/forms/select-region-form/select-region-form.component';
 import CountryCardList from '../components/country-card-list/country-card-list.component';
 
-export default function Homepage(params) {
-  // const [countries, setCountries] = useState([]);
-  const [selectRegion, setSelectRegion] = useState('');
+export default function Homepage() {
+  const regionsArray = [
+    { label: 'Filter by Region', value: 'Filter by Region' },
+    { label: 'Africa', value: 'Africa' },
+    { label: 'Americas', value: 'Americas' },
+    { label: 'Asia', value: 'Asia' },
+    { label: 'Europe', value: 'Europe' },
+    { label: 'Oceania', value: 'Oceania' },
+  ];
+  const [selectRegion, setSelectRegion] = useState('Filter by Region');
   const [inputCountry, setInputCountry] = useState('');
 
   const useFetch = (url) => {
@@ -35,38 +41,29 @@ export default function Homepage(params) {
     setSelectRegion(event.target.value);
   }
 
-  const countries = useFetch('https://restcountries.eu/rest/v2/all');
-  console.log(countries);
+  const countriesUrl =
+    selectRegion === 'Filter by Region'
+      ? 'https://restcountries.eu/rest/v2/all'
+      : `https://restcountries.eu/rest/v2/region/${selectRegion}`;
 
-  // useEffect(() => {
-  //   async function getCountries() {
-  //     const response = await fetch('https://restcountries.eu/rest/v2/all');
-  //     const data = response.json();
-  //     setCountries(data);
-  //     console.log(data);
-  //   }
-  //   getCountries();
-  // }, []);
-
-  // useEffect((selectRegion) => {
-  //   async function getRegion(selectRegion) {
-  //     const response = await fetch(
-  //       `https://restcountries.eu/rest/v2/region/${selectRegion}`
-  //     );
-  //     const data = response.json();
-  //     setSelectRegion(data);
-  //   }
-  //   getRegion(selectRegion);
-  // }, []);
+  const countries = useFetch(countriesUrl);
 
   return (
     <HomepageWrapper>
       <FormSection>
         <SearchForm onInputChange={onInputChange} countries={countries} />
-        {/* <SelectForm onSelectChange={onSelectChange} region={selectRegion} /> */}
+        <SelectForm
+          onSelectChange={onSelectChange}
+          region={selectRegion}
+          regionsArray={regionsArray}
+        />
       </FormSection>
       {countries ? (
-        <CountryCardList countries={countries} inputCountry={inputCountry} />
+        <CountryCardList
+          countries={countries}
+          inputCountry={inputCountry}
+          selectRegion={selectRegion}
+        />
       ) : (
         <h1>Loading...</h1>
       )}

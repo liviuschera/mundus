@@ -2,14 +2,16 @@ import React from 'react';
 
 import { SelectEl } from './select.styles';
 
-export default function Select({ onSelectChange, region }) {
+export default function Select({ ...props }) {
   return (
-    <Select value={region} onChange={onSelectChange}>
-      <option value="Africa">Africa</option>
-      <option value="Americas">Americas</option>
-      <option value="Asia">Asia</option>
-      <option value="Europe">Europe</option>
-      <option value="Oceania">Oceania</option>
-    </Select>
+    <SelectEl {...props}>
+      {props.regionsArray.map((region) => {
+        return (
+          <option key={region.value} value={region.value}>
+            {region.label}
+          </option>
+        );
+      })}
+    </SelectEl>
   );
 }
