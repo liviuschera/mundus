@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 import { HomepageWrapper, FormSection, CountryCount } from './homepage.styles';
 
-import SearchForm from '../components/forms/search-form/search-form.component';
-import SelectForm from '../components/forms/select-region-form/select-region-form.component';
-import CountryCardList from '../components/country-card-list/country-card-list.component';
+import SearchForm from '../../components/forms/search-form/search-form.component';
+import SelectForm from '../../components/forms/select-region-form/select-region-form.component';
+import CountryCardList from '../../components/country-card-list/country-card-list.component';
 
 function useFetch(url) {
   const [data, setData] = useState(null);
@@ -83,8 +83,8 @@ export default function Homepage() {
           />
         </>
       ) : (
-        <h1>Loading...</h1>
-      )}
+          <h1>Loading...</h1>
+        )}
     </HomepageWrapper>
   );
 }
