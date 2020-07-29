@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   CountryWrapper,
   Flag,
@@ -10,7 +11,9 @@ import {
 
 export default function Country({ ...params }) {
   const country = params.location.state.country;
+  const filteredCountries = params.location.state.filteredCountries;
   console.log(country);
+  console.log(filteredCountries);
 
   function listItems(items) {
     return items.map((item, index) => {
@@ -22,6 +25,21 @@ export default function Country({ ...params }) {
       );
     });
   }
+
+  function makeArryOfBorderCountries(countriesArray) {
+    const borderCountries = country.borders;
+    const borderCountriesArray = [];
+
+    countriesArray.filter((count) => {
+      if (borderCountries.includes(count.alpha3Code)) {
+        borderCountriesArray.push(count);
+      }
+    });
+    return borderCountriesArray;
+  }
+
+  const borderCountries = makeArryOfBorderCountries(filteredCountries);
+  console.log(borderCountries);
   return (
     <CountryWrapper>
       <Flag>
@@ -67,6 +85,25 @@ export default function Country({ ...params }) {
             {listItems(country.timezones)}
           </Info>
         </DetailsWrapper>
+        <Info>
+          <strong>Border Countries: </strong>
+          {borderCountries.map((borderCountry) => {
+            console.log(borderCountry);
+            return (
+              <Link
+                key={borderCountry.name}
+                to={{
+                  pathname: `/country/${borderCountry.name
+                    .toLowerCase()
+                    .replace(/\s/g, '-')}`,
+                  state: { country: borderCountry, filteredCountries },
+                }}
+              >
+                {borderCountry?.name ?? 'None'}
+              </Link>
+            );
+          })}
+        </Info>
       </InfoWrapper>
     </CountryWrapper>
   );

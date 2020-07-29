@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useLocation, useHistory, Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   CardWrapper,
   DetailsContainer,
@@ -8,9 +8,11 @@ import {
   Info,
 } from './country-card.styles';
 
-export default function CountryCard({ country }) {
-
-  const newTo = { pathname: `/country/${country.name.toLowerCase().replace(/\s/g, '-')}`, state: { country } }
+export default function CountryCard({ country, filteredCountries }) {
+  const newTo = {
+    pathname: `/country/${country.name.toLowerCase().replace(/\s/g, '-')}`,
+    state: { country, filteredCountries },
+  };
 
   return (
     <Link to={newTo}>
