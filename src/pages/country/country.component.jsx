@@ -8,6 +8,7 @@ import {
   Info,
   Name,
 } from './country.styled';
+import CustomLink from '../../components/custom-link/custom-link.component';
 
 export default function Country({ ...params }) {
   const country = params.location.state.country;
@@ -36,6 +37,26 @@ export default function Country({ ...params }) {
       }
     });
     return borderCountriesArray;
+  }
+
+  function displayBorderLinks(borderCountries) {
+    if (borderCountries.length < 1) return 'None';
+    return borderCountries.map((borderCountry) => {
+      console.log(borderCountry);
+      return (
+        <CustomLink
+          key={borderCountry.name}
+          to={{
+            pathname: `/country/${borderCountry.name
+              .toLowerCase()
+              .replace(/\s/g, '-')}`,
+            state: { country: borderCountry, filteredCountries },
+          }}
+        >
+          {borderCountry.name.replace(/\(.+?\)/, '')}
+        </CustomLink>
+      );
+    });
   }
 
   const borderCountries = makeArryOfBorderCountries(filteredCountries);
@@ -87,22 +108,7 @@ export default function Country({ ...params }) {
         </DetailsWrapper>
         <Info>
           <strong>Border Countries: </strong>
-          {borderCountries.map((borderCountry) => {
-            console.log(borderCountry);
-            return (
-              <Link
-                key={borderCountry.name}
-                to={{
-                  pathname: `/country/${borderCountry.name
-                    .toLowerCase()
-                    .replace(/\s/g, '-')}`,
-                  state: { country: borderCountry, filteredCountries },
-                }}
-              >
-                {borderCountry?.name ?? 'None'}
-              </Link>
-            );
-          })}
+          {displayBorderLinks(borderCountries)}
         </Info>
       </InfoWrapper>
     </CountryWrapper>

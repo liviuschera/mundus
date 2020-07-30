@@ -13,11 +13,11 @@ export const CountryWrapper = styled.main`
 export const Flag = styled.aside`
   width: 100%;
   height: 100%;
-  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.2); */
   img {
     width: inherit;
     height: inherit;
-    object-fit: cover;
+    /* object-fit: cover; */
   }
 `;
 
