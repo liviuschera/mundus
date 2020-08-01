@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
-export const CountryWrapper = styled.main`
+export const PageWrapper = styled.main`
   max-width: 120rem;
-  margin: 5rem auto 0;
+  margin: 1rem auto;
   padding: 3rem;
+`;
+export const CountryWrapper = styled.div`
   display: grid;
   grid-template-columns: 30% 1fr;
   gap: 15rem;
@@ -39,11 +41,17 @@ export const DetailsWrapper = styled.div`
 export const Name = styled.h3`
   font-size: 2rem;
   font-weight: 700;
+  &::before {
+    /* position: absolute; */
+    /* content: '\2190'; */
+    content: 'extra';
+  }
 `;
 
 export const Info = styled.p`
   font-size: 1.5rem;
   line-height: 2.3rem;
+
   strong {
     font-weight: 600;
   }

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {
+  PageWrapper,
   CountryWrapper,
   Flag,
   InfoWrapper,
@@ -9,6 +10,7 @@ import {
   Name,
 } from './country.styled';
 import CustomLink from '../../components/custom-link/custom-link.component';
+import { GoogleMap, useGoogleMap, useLoadScript } from '@react-google-maps/api';
 
 export default function Country({ ...params }) {
   const country = params.location.state.country;
@@ -61,56 +63,64 @@ export default function Country({ ...params }) {
 
   const borderCountries = makeArryOfBorderCountries(filteredCountries);
   console.log(borderCountries);
+  const history = useHistory();
+  console.log(history);
+
   return (
-    <CountryWrapper>
-      <Flag>
-        <img src={country.flag} alt={`Flag of ${country.name}`} />
-      </Flag>
-      <InfoWrapper>
-        <Name>{country.name}</Name>
-        <DetailsWrapper>
+    <PageWrapper>
+      <CustomLink as="div" onClick={() => history.goBack()} button>
+        <span>&larr;</span> Back
+      </CustomLink>
+      <CountryWrapper>
+        <Flag>
+          {<img src={country.flag} alt={`Flag of ${country.name}`} />}
+        </Flag>
+        <InfoWrapper>
+          <Name>{country.name}</Name>
+          <DetailsWrapper>
+            <Info>
+              <strong>Native Name: </strong>
+              {country.nativeName}
+            </Info>
+            <Info>
+              <strong>Population: </strong>
+              {country.population}
+            </Info>
+            <Info>
+              <strong>Region: </strong>
+              {country.region}
+            </Info>
+            <Info>
+              <strong>Sub Region: </strong>
+              {country.subregion}
+            </Info>
+            <Info>
+              <strong>Capital: </strong>
+              {country.capital}
+            </Info>
+            <Info>
+              <strong>Top Level Domain: </strong>
+              {country.topLevelDomain}
+            </Info>
+            <Info>
+              <strong>Currencies: </strong>
+              {listItems(country.currencies)}
+            </Info>
+            <Info>
+              <strong>Languages: </strong>
+              {listItems(country.languages)}
+            </Info>
+            <Info>
+              <strong>Time Zones: </strong>
+              {listItems(country.timezones)}
+            </Info>
+          </DetailsWrapper>
           <Info>
-            <strong>Native Name: </strong>
-            {country.nativeName}
+            <strong>Border Countries: </strong>
+            {displayBorderLinks(borderCountries)}
           </Info>
-          <Info>
-            <strong>Population: </strong>
-            {country.population}
-          </Info>
-          <Info>
-            <strong>Region: </strong>
-            {country.region}
-          </Info>
-          <Info>
-            <strong>Sub Region: </strong>
-            {country.subregion}
-          </Info>
-          <Info>
-            <strong>Capital: </strong>
-            {country.capital}
-          </Info>
-          <Info>
-            <strong>Top Level Domain: </strong>
-            {country.topLevelDomain}
-          </Info>
-          <Info>
-            <strong>Currencies: </strong>
-            {listItems(country.currencies)}
-          </Info>
-          <Info>
-            <strong>Languages: </strong>
-            {listItems(country.languages)}
-          </Info>
-          <Info>
-            <strong>Time Zones: </strong>
-            {listItems(country.timezones)}
-          </Info>
-        </DetailsWrapper>
-        <Info>
-          <strong>Border Countries: </strong>
-          {displayBorderLinks(borderCountries)}
-        </Info>
-      </InfoWrapper>
-    </CountryWrapper>
+        </InfoWrapper>
+      </CountryWrapper>
+    </PageWrapper>
   );
 }
