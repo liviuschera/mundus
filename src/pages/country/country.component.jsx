@@ -8,6 +8,7 @@ import {
   DetailsWrapper,
   Info,
   Name,
+  Header,
 } from './country.styled';
 import CustomLink from '../../components/custom-link/custom-link.component';
 
@@ -45,7 +46,7 @@ export default function Country({ ...params }) {
   function displayBorderLinks(borderCountries) {
     if (borderCountries.length < 1) return 'None';
     return borderCountries.map((borderCountry) => {
-      console.log(borderCountry);
+      // console.log(borderCountry);
       return (
         <CustomLink
           key={borderCountry.name}
@@ -63,21 +64,47 @@ export default function Country({ ...params }) {
   }
 
   const borderCountries = makeArryOfBorderCountries(filteredCountries);
-  console.log(borderCountries);
+  // console.log(borderCountries);
   const history = useHistory();
   console.log(history);
 
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsAPIKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  });
+
+  const mapContainerStyles = {
+    width: '100%',
+    height: '100%',
+  };
+
+  const center = {
+    lat: country.latlng[0],
+    lng: country.latlng[1],
+  };
+  console.log(isLoaded, loadError);
   return (
     <PageWrapper>
       <CustomLink as="button" onClick={() => history.goBack()} button>
         <span>&larr;</span> Back
       </CustomLink>
       <CountryWrapper>
-        <Flag>
-          {<img src={country.flag} alt={`Flag of ${country.name}`} />}
-        </Flag>
+        {isLoaded ? (
+          <GoogleMap
+            mapContainerStyles={mapContainerStyles}
+            zoom={5}
+            center={center}
+          ></GoogleMap>
+        ) : (
+          'Loading map'
+        )}
+
         <InfoWrapper>
-          <Name>{country.name}</Name>
+          <Header>
+            <Name>{country.name}</Name>
+            <Flag>
+              {<img src={country.flag} alt={`Flag of ${country.name}`} />}
+            </Flag>
+          </Header>
           <DetailsWrapper>
             <Info>
               <strong>Native Name: </strong>

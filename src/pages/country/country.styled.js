@@ -1,11 +1,5 @@
 import styled from 'styled-components';
-export const Button = styled.div`
-  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.2);
-  padding: 1rem;
-  &::before {
-    content: '\27F5';
-  }
-`;
+
 export const PageWrapper = styled.main`
   max-width: 120rem;
   margin: 1rem auto;
@@ -13,20 +7,8 @@ export const PageWrapper = styled.main`
 `;
 export const CountryWrapper = styled.div`
   display: grid;
-  grid-template-columns: 30% 1fr;
-  gap: 15rem;
-  /* align-content: center; */
-`;
-
-export const Flag = styled.aside`
-  width: 100%;
-  height: 100%;
-  /* box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.2); */
-  img {
-    width: inherit;
-    height: inherit;
-    /* object-fit: cover; */
-  }
+  grid-template-columns: 40% 1fr;
+  gap: 7rem;
 `;
 
 export const InfoWrapper = styled.article`
@@ -43,15 +25,26 @@ export const DetailsWrapper = styled.div`
 
   justify-content: space-between;
 `;
+export const Header = styled.header`
+  display: inline-grid;
+  grid-template-columns: max-content 15rem;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: start;
+`;
 
+export const Flag = styled.aside`
+  /* width: 20rem; */
+  height: 5rem;
+
+  img {
+    width: inherit;
+    height: inherit;
+    /* object-fit: cover; */
+  }
+`;
 export const Name = styled.h3`
   font-size: 2rem;
   font-weight: 700;
-  &::before {
-    /* position: absolute; */
-    /* content: '\2190'; */
-    content: 'extra';
-  }
 `;
 
 export const Info = styled.p`
