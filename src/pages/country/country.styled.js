@@ -1,5 +1,11 @@
 import styled from 'styled-components';
-
+export const Button = styled.div`
+  box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  &::before {
+    content: '\27F5';
+  }
+`;
 export const PageWrapper = styled.main`
   max-width: 120rem;
   margin: 1rem auto;

@@ -10,6 +10,7 @@ import {
   Name,
 } from './country.styled';
 import CustomLink from '../../components/custom-link/custom-link.component';
+
 import { GoogleMap, useGoogleMap, useLoadScript } from '@react-google-maps/api';
 
 export default function Country({ ...params }) {
@@ -68,7 +69,7 @@ export default function Country({ ...params }) {
 
   return (
     <PageWrapper>
-      <CustomLink as="div" onClick={() => history.goBack()} button>
+      <CustomLink as="button" onClick={() => history.goBack()} button>
         <span>&larr;</span> Back
       </CustomLink>
       <CountryWrapper>
