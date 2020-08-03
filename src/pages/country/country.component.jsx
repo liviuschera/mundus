@@ -13,63 +13,25 @@ import {
 import CustomLink from '../../components/custom-link/custom-link.component';
 
 import { GoogleMap, useGoogleMap, useLoadScript } from '@react-google-maps/api';
+import mapStyles from '../../mapStyles';
+import {
+  makeArryOfBorderCountries,
+  listItems,
+  displayBorderLinks,
+} from './country.utils';
 
 export default function Country({ ...params }) {
   const country = params.location.state.country;
   const filteredCountries = params.location.state.filteredCountries;
   console.log(country);
-  console.log(filteredCountries);
+  // console.log(filteredCountries);
 
-  function listItems(items) {
-    return items.map((item, index) => {
-      return (
-        <span key={item?.name ?? item}>
-          {item?.name ?? item}
-          {items.length - 1 === index ? '' : ', '}
-        </span>
-      );
-    });
-  }
-
-  function makeArryOfBorderCountries(countriesArray) {
-    const borderCountries = country.borders;
-    const borderCountriesArray = [];
-
-    countriesArray.filter((count) => {
-      if (borderCountries.includes(count.alpha3Code)) {
-        borderCountriesArray.push(count);
-      }
-    });
-    return borderCountriesArray;
-  }
-
-  function displayBorderLinks(borderCountries) {
-    if (borderCountries.length < 1) return 'None';
-    return borderCountries.map((borderCountry) => {
-      // console.log(borderCountry);
-      return (
-        <CustomLink
-          key={borderCountry.name}
-          to={{
-            pathname: `/country/${borderCountry.name
-              .toLowerCase()
-              .replace(/\s/g, '-')}`,
-            state: { country: borderCountry, filteredCountries },
-          }}
-        >
-          {borderCountry.name.replace(/\(.+?\)/, '')}
-        </CustomLink>
-      );
-    });
-  }
-
-  const borderCountries = makeArryOfBorderCountries(filteredCountries);
-  // console.log(borderCountries);
+  const borderCountries = makeArryOfBorderCountries(filteredCountries, country);
   const history = useHistory();
   console.log(history);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsAPIKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
   const mapContainerStyles = {
@@ -81,18 +43,28 @@ export default function Country({ ...params }) {
     lat: country.latlng[0],
     lng: country.latlng[1],
   };
-  console.log(isLoaded, loadError);
+
+  const options = {
+    styles: mapStyles,
+    disableDefaultUI: true,
+    zoomControl: true,
+  };
+
   return (
     <PageWrapper>
       <CustomLink as="button" onClick={() => history.goBack()} button>
         <span>&larr;</span> Back
       </CustomLink>
       <CountryWrapper>
+        {isLoaded
+          ? console.log(window.google.maps.Map.prototype.getBounds())
+          : 'notyet'}
         {isLoaded ? (
           <GoogleMap
             mapContainerStyles={mapContainerStyles}
             zoom={5}
             center={center}
+            options={options}
           ></GoogleMap>
         ) : (
           'Loading map'
@@ -145,7 +117,7 @@ export default function Country({ ...params }) {
           </DetailsWrapper>
           <Info>
             <strong>Border Countries: </strong>
-            {displayBorderLinks(borderCountries)}
+            {displayBorderLinks(borderCountries, filteredCountries)}
           </Info>
         </InfoWrapper>
       </CountryWrapper>
