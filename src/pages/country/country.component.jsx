@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   PageWrapper,
@@ -9,6 +9,9 @@ import {
   Info,
   Name,
   Header,
+  ImagesContainer,
+  ImageWrapper,
+  HoverImage,
 } from './country.styled';
 import CustomLink from '../../components/custom-link/custom-link.component';
 
@@ -19,15 +22,18 @@ import {
   listItems,
   displayBorderLinks,
 } from './country.utils';
+import useFetch from '../../utils/useFetch';
 
 export default function Country({ ...params }) {
+  const history = useHistory();
+  const [isHovering, setIsHovering] = useState(false);
   const country = params.location.state.country;
   const filteredCountries = params.location.state.filteredCountries;
   console.log(country);
   // console.log(filteredCountries);
 
   const borderCountries = makeArryOfBorderCountries(filteredCountries, country);
-  const history = useHistory();
+
   console.log(history);
 
   const { isLoaded, loadError } = useLoadScript({
@@ -49,6 +55,26 @@ export default function Country({ ...params }) {
     disableDefaultUI: true,
     zoomControl: true,
   };
+  const searchTerm = `${country.name.toLowerCase()}`;
+  console.log(
+    `https://pixabay.com/api/?key=${
+      process.env.REACT_APP_PIXABAY_API_KEY
+    }&q=${encodeURIComponent(searchTerm)}&image_type=photo`
+  );
+
+  const countryImages = useFetch(
+    `https://pixabay.com/api/?key=${
+      process.env.REACT_APP_PIXABAY_API_KEY
+    }&q=${encodeURIComponent(searchTerm)}&image_type=photo`
+  );
+  const filteredImagesArray = countryImages?.hits.filter(
+    (_, index) => index < 5
+  );
+  function handleMouseOver(...props) {
+    console.log('@@@@@@@@@@@@@@@@@@@', props);
+    setIsHovering(() => !isHovering);
+  }
+  console.log(filteredImagesArray);
 
   return (
     <PageWrapper>
@@ -56,9 +82,9 @@ export default function Country({ ...params }) {
         <span>&larr;</span> Back
       </CustomLink>
       <CountryWrapper>
-        {isLoaded
+        {/* {isLoaded
           ? console.log(window.google.maps.Map.prototype.getBounds())
-          : 'notyet'}
+          : 'notyet'} */}
         {isLoaded ? (
           <GoogleMap
             mapContainerStyles={mapContainerStyles}
@@ -67,7 +93,7 @@ export default function Country({ ...params }) {
             options={options}
           ></GoogleMap>
         ) : (
-          'Loading map'
+          'Loading map...'
         )}
 
         <InfoWrapper>
@@ -121,6 +147,20 @@ export default function Country({ ...params }) {
           </Info>
         </InfoWrapper>
       </CountryWrapper>
+      <ImagesContainer>
+        {filteredImagesArray?.map((country) => (
+          <ImageWrapper
+            key={country.id}
+            thumbnail={country.previewURL}
+            webformatURL={country.webformatURL}
+            // onMouseOver={handleMouseOver}
+          >
+            {/* <HoverImage src={country.webformatURL} alt=""></HoverImage> */}
+            {/* <img src={country.webformatURL} alt="" /> */}
+          </ImageWrapper>
+        ))}
+        {/* {isHovering ? <HoverImage src={country}>Is hovering</HoverImage> : null} */}
+      </ImagesContainer>
     </PageWrapper>
   );
 }

@@ -6,21 +6,7 @@ import SearchForm from '../../components/forms/search-form/search-form.component
 import SelectForm from '../../components/forms/select-region-form/select-region-form.component';
 import CountryCardList from '../../components/country-card-list/country-card-list.component';
 
-function useFetch(url) {
-  const [data, setData] = useState(null);
-
-  async function fetchData() {
-    const response = await fetch(url);
-    const json = await response.json();
-    setData(json);
-  }
-
-  useEffect(() => {
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url]);
-  return data;
-}
+import useFetch from '../../utils/useFetch';
 
 const regionsArray = [
   { label: 'Filter by Region', value: 'Filter by Region' },
@@ -83,8 +69,8 @@ export default function Homepage() {
           />
         </>
       ) : (
-          <h1>Loading...</h1>
-        )}
+        <h1>Loading...</h1>
+      )}
     </HomepageWrapper>
   );
 }
