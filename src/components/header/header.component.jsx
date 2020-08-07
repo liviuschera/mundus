@@ -10,7 +10,7 @@ export default function Header(params) {
   return (
     <HeaderWrapper>
       <Link to="/">
-        <Heading>What Country?</Heading>
+        <Heading>Mundus</Heading>
       </Link>
       <ThemeSwitcher onClick={() => setTheme(!theme)}>
         {theme ? '🌞 Light mode' : '🌛 Dark Mode'}
