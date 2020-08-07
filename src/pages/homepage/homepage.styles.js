@@ -23,8 +23,13 @@ export const HomepageWrapper = styled.main`
 `;
 
 export const FormSection = styled.div`
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
+  flex-wrap: wrap; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(23rem, auto));
+  justify-content: space-between;
+  gap: 2rem;
 `;
 
 export const CountryCount = styled.p`
