@@ -33,8 +33,8 @@ export default function Homepage() {
 
   const countriesUrl =
     selectRegion === 'Filter by Region'
-      ? 'https://restcountries.eu/rest/v2/all'
-      : `https://restcountries.eu/rest/v2/region/${selectRegion}`;
+      ? 'https://restcountries.com/v3.1/all'
+      : `https://restcountries.com/v3.1/region/${selectRegion}`;
 
   const whichRegion =
     selectRegion === 'Filter by Region' ? 'the World' : selectRegion;
