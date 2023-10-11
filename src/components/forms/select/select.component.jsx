@@ -5,9 +5,11 @@ import { SelectEl } from './select.styles';
 export default function Select({ ...props }) {
   return (
     <SelectEl {...props}>
-      {props.regionsArray.map((region) => {
+      {console.log("select component props: ",props)}
+      {props.regionsarray.map((region) => {
+        let uid = Math.random().toString(16).substring(2, 11)
         return (
-          <option key={region.value} value={region.value}>
+          <option key={uid} value={region.value}>
             {region.label}
           </option>
         );

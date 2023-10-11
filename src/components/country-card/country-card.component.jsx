@@ -18,7 +18,7 @@ export default function CountryCard({ country, filteredCountries }) {
     <Link to={newTo}>
       <CardWrapper>
         <Flag>
-          <img src={country.flag} alt="" />
+          <img src={country.flag} alt={`flag of ${country.name.common}`} />
         </Flag>
         <DetailsContainer>
           <Name>{country.name.common}</Name>

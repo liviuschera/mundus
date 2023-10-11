@@ -48,7 +48,7 @@ export default function Homepage() {
         <SelectForm
           onSelectChange={onSelectChange}
           region={selectRegion}
-          regionsArray={regionsArray}
+          regionsarray={regionsArray}
         />
       </FormSection>
 

@@ -56,7 +56,7 @@ export default function Country({ ...params }) {
     zoomControl: true,
   };
   const searchTerm = `${country.name.toLowerCase()}`;
-  console.log(
+  console.log('country.component:   '
     `https://pixabay.com/api/?key=${
       process.env.REACT_APP_PIXABAY_API_KEY
     }&q=${encodeURIComponent(searchTerm)}&image_type=photo`

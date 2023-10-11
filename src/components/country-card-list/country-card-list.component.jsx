@@ -4,7 +4,6 @@ import { CountryCardListWrapper } from './country-card-list.styles';
 import CountryCard from '../country-card/country-card.component';
 
 export default function CountryCardList({ countries, inputCountry }) {
-  console.log("logging coutries from coutrycardlist: ",countries);
   const filteredCountries = countries.filter((country) =>
     country.name.common.toLowerCase().includes(inputCountry.toLowerCase())
   );
