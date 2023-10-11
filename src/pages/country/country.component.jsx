@@ -101,7 +101,7 @@ export default function Country({ ...params }) {
           <Header>
             <Name>{country.name.common}</Name>
             <Flag>
-              {<img src={country.flag} alt={`Flag of ${country.name.common}`} />}
+              {<img src={country.flags.png} alt={`Flag of ${country.name.common}`} />}
             </Flag>
           </Header>
           <DetailsWrapper>
