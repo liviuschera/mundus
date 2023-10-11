@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const HomepageWrapper = styled.main`
   max-width: 120rem;
@@ -9,7 +9,7 @@ export const HomepageWrapper = styled.main`
     cursor: pointer;
     position: relative;
     &:hover::after {
-      content: 'Data from https://restcountries.eu/';
+      content: "Data from https://restcountries.com/";
       position: absolute;
       bottom: 100%;
       left: 100%;

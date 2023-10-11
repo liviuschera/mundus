@@ -10,7 +10,7 @@ import {
 
 export default function CountryCard({ country, filteredCountries }) {
   const newTo = {
-    pathname: `/country/${country.name.toLowerCase().replace(/\s/g, '-')}`,
+    pathname: `/country/${country.name.common.toLowerCase().replace(/\s/g, '-')}`,
     state: { country, filteredCountries },
   };
 
@@ -21,7 +21,7 @@ export default function CountryCard({ country, filteredCountries }) {
           <img src={country.flag} alt="" />
         </Flag>
         <DetailsContainer>
-          <Name>{country.name}</Name>
+          <Name>{country.name.common}</Name>
           <div>
             <Info>
               <span>Population: </span>
