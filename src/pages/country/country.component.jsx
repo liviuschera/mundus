@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   PageWrapper,
@@ -11,7 +11,7 @@ import {
   Header,
   ImagesContainer,
   ImageWrapper,
-  HoverImage,
+  // HoverImage,
 } from './country.styled';
 import CustomLink from '../../components/custom-link/custom-link.component';
 
@@ -29,12 +29,12 @@ export default function Country({ ...params }) {
   const [isHovering, setIsHovering] = useState(false);
   const country = params.location.state.country;
   const filteredCountries = params.location.state.filteredCountries;
-  console.log(country);
+  // console.log(country);
   // console.log(filteredCountries);
 
   const borderCountries = makeArryOfBorderCountries(filteredCountries, country);
 
-  console.log(history);
+  // console.log("history from country.component: ",history);
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -55,12 +55,13 @@ export default function Country({ ...params }) {
     disableDefaultUI: true,
     zoomControl: true,
   };
-  const searchTerm = `${country.name.toLowerCase()}`;
-  console.log('country.component:   '
-    `https://pixabay.com/api/?key=${
-      process.env.REACT_APP_PIXABAY_API_KEY
-    }&q=${encodeURIComponent(searchTerm)}&image_type=photo`
-  );
+  const searchTerm = `${country.name.common.toLowerCase()}`;
+  console.log("country.name.toLowerCase() from country.component: ", country);
+  // console.log('country.component:   '
+  //   `https://pixabay.com/api/?key=${
+  //     process.env.REACT_APP_PIXABAY_API_KEY
+  //   }&q=${encodeURIComponent(searchTerm)}&image_type=photo`
+  // );
 
   const countryImages = useFetch(
     `https://pixabay.com/api/?key=${
@@ -74,7 +75,7 @@ export default function Country({ ...params }) {
     console.log('@@@@@@@@@@@@@@@@@@@', props);
     setIsHovering(() => !isHovering);
   }
-  console.log(filteredImagesArray);
+  console.log("country component filteredImagesArray: ",filteredImagesArray);
 
   return (
     <PageWrapper>
@@ -98,15 +99,15 @@ export default function Country({ ...params }) {
 
         <InfoWrapper>
           <Header>
-            <Name>{country.name}</Name>
+            <Name>{country.name.common}</Name>
             <Flag>
-              {<img src={country.flag} alt={`Flag of ${country.name}`} />}
+              {<img src={country.flag} alt={`Flag of ${country.name.common}`} />}
             </Flag>
           </Header>
           <DetailsWrapper>
             <Info>
               <strong>Native Name: </strong>
-              {country.nativeName}
+              {country.name.nativeName.official}
             </Info>
             <Info>
               <strong>Population: </strong>

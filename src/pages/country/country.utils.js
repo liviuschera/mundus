@@ -1,20 +1,23 @@
-import React from 'react';
+import React from "react";
 
-import CustomLink from '../../components/custom-link/custom-link.component';
+import CustomLink from "../../components/custom-link/custom-link.component";
 
 export function listItems(items) {
-  return items.map((item, index) => {
+  console.log("function listItems(items): ", Object.values(items)[0]);
+  // return (items instanceof Object ? Object.values(items) : items).map(
+  return Object.values(items).map((item, index) => {
     return (
-      <span key={item?.name ?? item}>
+      <span key={item?.name?.toLowerCase() ?? item.toLowerCase()}>
         {item?.name ?? item}
-        {items.length - 1 === index ? '' : ', '}
+        {items.length - 1 === index ? "" : ", "}
       </span>
     );
   });
 }
 
 export function makeArryOfBorderCountries(countriesArray, country) {
-  const borderCountries = country.borders;
+  console.log("country from country.utils.js: ", country);
+  const borderCountries = country.borders ?? [];
   const borderCountriesArray = [];
 
   countriesArray.filter((count) => {
@@ -26,20 +29,21 @@ export function makeArryOfBorderCountries(countriesArray, country) {
 }
 
 export function displayBorderLinks(borderCountries, filteredCountries) {
-  if (borderCountries.length < 1) return 'None';
+  console.log("borderCountries", borderCountries);
+  if (borderCountries.length < 1) return "None";
   return borderCountries.map((borderCountry) => {
     // console.log(borderCountry);
     return (
       <CustomLink
-        key={borderCountry.name}
+        key={borderCountry?.name}
         to={{
           pathname: `/country/${borderCountry.name
             .toLowerCase()
-            .replace(/\s/g, '-')}`,
+            .replace(/\s/g, "-")}`,
           state: { country: borderCountry, filteredCountries },
         }}
       >
-        {borderCountry.name.replace(/\(.+?\)/, '')}
+        {borderCountry.name.replace(/\(.+?\)/, "")}
       </CustomLink>
     );
   });

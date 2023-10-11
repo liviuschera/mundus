@@ -13,7 +13,7 @@ export default function CountryCardList({ countries, inputCountry }) {
       {filteredCountries.map((country) => {
         return (
           <CountryCard
-            key={country.name}
+            key={country.name.common}
             country={country}
             filteredCountries={filteredCountries}
           />
