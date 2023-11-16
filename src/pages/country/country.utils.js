@@ -15,10 +15,8 @@ export function listItems(items) {
 }
 
 export function makeArryOfBorderCountries(countriesArray, country) {
-  console.log("country >>>>>>>>>", country);
   const borderCountries = country.borders ?? [];
   const borderCountriesArray = [];
-  console.log("borderCountries >>>>>>>>>", country.borders);
 
   countriesArray.filter((countryObject) => {
     if (borderCountries.includes(countryObject.cca3)) {
@@ -29,7 +27,6 @@ export function makeArryOfBorderCountries(countriesArray, country) {
 }
 
 export function displayBorderLinks(borderCountries, filteredCountries) {
-  console.log("displayBorderLinks>>>>>>>>>>", borderCountries);
   if (borderCountries.length < 1) return "None";
   return borderCountries.map((borderCountry) => {
     return (
