@@ -1,13 +1,14 @@
-![mundus - home](https://github.com/liviuschera/mundus/assets/12068956/db79a4cf-081e-439f-a347-33109aa72ec2)### Mundus
+### Mundus
+A React app that integtates the [REST Countries API](https://restcountries.com), [Google Maps](https://cloud.google.com/maps-platform/) and [Pixabay](https://pixabay.com/api/docs/) APIs.
 
-A [React](https://reactjs.org) that integrates with the [REST Countries API](https://restcountries.com), [Google Maps](https://cloud.google.com/maps-platform/) and [Pixabay](https://pixabay.com/api/docs/) APIs.
+____________
 
+![mundus - home](https://github.com/liviuschera/mundus/assets/12068956/db79a4cf-081e-439f-a347-33109aa72ec2)
 _________________
 
 ![mundus - darkmode](https://github.com/liviuschera/mundus/assets/12068956/1e8c0d7b-a65d-415b-a9ee-8327a6c94278)
 
 _____
-
 
 ![mundus - home](https://github.com/liviuschera/mundus/assets/12068956/1aaaef7b-4202-40a7-9789-82ddbb2383f5)
 
