@@ -107,7 +107,7 @@ export default function Country({ ...params }) {
             </Info>
             <Info>
               <strong>Population: </strong>
-              {country.population}
+              {new Intl.NumberFormat().format(country.population)}
             </Info>
             <Info>
               <strong>Region: </strong>
