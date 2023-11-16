@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { HomepageWrapper, FormSection, CountryCount } from './homepage.styles';
+import { HomepageWrapper, FormSection, CountryCount } from "./homepage.styles";
 
-import SearchForm from '../../components/forms/search-form/search-form.component';
-import SelectForm from '../../components/forms/select-region-form/select-region-form.component';
-import CountryCardList from '../../components/country-card-list/country-card-list.component';
+import SearchForm from "../../components/forms/search-form/search-form.component";
+import SelectForm from "../../components/forms/select-region-form/select-region-form.component";
+import CountryCardList from "../../components/country-card-list/country-card-list.component";
 
-import useFetch from '../../utils/useFetch';
+import useFetch from "../../utils/useFetch";
 
 const regionsArray = [
-  { label: 'Filter by Region', value: 'Filter by Region' },
-  { label: 'Africa', value: 'Africa' },
-  { label: 'Americas', value: 'Americas' },
-  { label: 'Asia', value: 'Asia' },
-  { label: 'Europe', value: 'Europe' },
-  { label: 'Oceania', value: 'Oceania' },
+  { label: "Filter by Region", value: "Filter by Region" },
+  { label: "Africa", value: "Africa" },
+  { label: "Americas", value: "Americas" },
+  { label: "Asia", value: "Asia" },
+  { label: "Europe", value: "Europe" },
+  { label: "Oceania", value: "Oceania" },
 ];
 
 export default function Homepage() {
-  const [selectRegion, setSelectRegion] = useState('Filter by Region');
-  const [inputCountry, setInputCountry] = useState('');
+  const [selectRegion, setSelectRegion] = useState("Filter by Region");
+  const [inputCountry, setInputCountry] = useState("");
 
   // const [countries, setCountries] = useState([]);
 
@@ -32,15 +32,15 @@ export default function Homepage() {
   }
 
   const countriesUrl =
-    selectRegion === 'Filter by Region'
-      ? 'https://restcountries.com/v3.1/all'
+    selectRegion === "Filter by Region"
+      ? "https://restcountries.com/v3.1/all"
       : `https://restcountries.com/v3.1/region/${selectRegion}`;
 
   const whichRegion =
-    selectRegion === 'Filter by Region' ? 'the World' : selectRegion;
+    selectRegion === "Filter by Region" ? "the World" : selectRegion;
 
   const countries = useFetch(countriesUrl);
-  console.log(countries?.length);
+  // console.log(countries?.length);
   return (
     <HomepageWrapper>
       <FormSection>

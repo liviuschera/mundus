@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import {
   PageWrapper,
   CountryWrapper,
@@ -12,25 +12,23 @@ import {
   ImagesContainer,
   ImageWrapper,
   // HoverImage,
-} from './country.styled';
-import CustomLink from '../../components/custom-link/custom-link.component';
+} from "./country.styled";
+import CustomLink from "../../components/custom-link/custom-link.component";
 
-import { GoogleMap, useGoogleMap, useLoadScript } from '@react-google-maps/api';
-import mapStyles from '../../mapStyles';
+import { GoogleMap, useGoogleMap, useLoadScript } from "@react-google-maps/api";
+import mapStyles from "../../mapStyles";
 import {
   makeArryOfBorderCountries,
   listItems,
   displayBorderLinks,
-} from './country.utils';
-import useFetch from '../../utils/useFetch';
+} from "./country.utils";
+import useFetch from "../../utils/useFetch";
 
 export default function Country({ ...params }) {
   const history = useHistory();
   const [isHovering, setIsHovering] = useState(false);
   const country = params.location.state.country;
   const filteredCountries = params.location.state.filteredCountries;
-  // console.log(country);
-  // console.log(filteredCountries);
 
   const borderCountries = makeArryOfBorderCountries(filteredCountries, country);
 
@@ -41,8 +39,8 @@ export default function Country({ ...params }) {
   });
 
   const mapContainerStyles = {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   };
 
   const center = {
@@ -56,13 +54,6 @@ export default function Country({ ...params }) {
     zoomControl: true,
   };
   const searchTerm = `${country.name.common.toLowerCase()}`;
-  console.log("country.name.toLowerCase() from country.component: ", country);
-  // console.log('country.component:   '
-  //   `https://pixabay.com/api/?key=${
-  //     process.env.REACT_APP_PIXABAY_API_KEY
-  //   }&q=${encodeURIComponent(searchTerm)}&image_type=photo`
-  // );
-
   const countryImages = useFetch(
     `https://pixabay.com/api/?key=${
       process.env.REACT_APP_PIXABAY_API_KEY
@@ -72,10 +63,9 @@ export default function Country({ ...params }) {
     (_, index) => index < 5
   );
   function handleMouseOver(...props) {
-    console.log('@@@@@@@@@@@@@@@@@@@', props);
+    console.log("@@@@@@@@@@@@@@@@@@@", props);
     setIsHovering(() => !isHovering);
   }
-  console.log("country component filteredImagesArray: ",filteredImagesArray);
 
   return (
     <PageWrapper>
@@ -85,7 +75,7 @@ export default function Country({ ...params }) {
       <CountryWrapper>
         {/* {isLoaded
           ? console.log(window.google.maps.Map.prototype.getBounds())
-          : 'notyet'} */}
+          : "notyet"} */}
         {isLoaded ? (
           <GoogleMap
             mapContainerStyles={mapContainerStyles}
@@ -94,14 +84,19 @@ export default function Country({ ...params }) {
             options={options}
           ></GoogleMap>
         ) : (
-          'Loading map...'
+          "Loading map..."
         )}
 
         <InfoWrapper>
           <Header>
             <Name>{country.name.common}</Name>
             <Flag>
-              {<img src={country.flags.png} alt={`Flag of ${country.name.common}`} />}
+              {
+                <img
+                  src={country.flags.png}
+                  alt={`Flag of ${country.name.common}`}
+                />
+              }
             </Flag>
           </Header>
           <DetailsWrapper>
