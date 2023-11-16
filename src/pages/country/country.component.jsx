@@ -29,7 +29,8 @@ export default function Country({ ...params }) {
   const [isHovering, setIsHovering] = useState(false);
   const country = params.location.state.country;
   const filteredCountries = params.location.state.filteredCountries;
-
+  const countryNativeName = Object.entries(country.name.nativeName)[0][1]
+    .official;
   const borderCountries = makeArryOfBorderCountries(filteredCountries, country);
 
   // console.log("history from country.component: ",history);
@@ -102,7 +103,7 @@ export default function Country({ ...params }) {
           <DetailsWrapper>
             <Info>
               <strong>Native Name: </strong>
-              {country.name.nativeName.official}
+              {countryNativeName}
             </Info>
             <Info>
               <strong>Population: </strong>
@@ -122,7 +123,7 @@ export default function Country({ ...params }) {
             </Info>
             <Info>
               <strong>Top Level Domain: </strong>
-              {country.topLevelDomain}
+              {country.tld[0]}
             </Info>
             <Info>
               <strong>Currencies: </strong>
