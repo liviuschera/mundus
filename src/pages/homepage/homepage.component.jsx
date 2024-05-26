@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { HomepageWrapper, FormSection, CountryCount } from "./homepage.styles";
 
@@ -7,6 +7,8 @@ import SelectForm from "../../components/forms/select-region-form/select-region-
 import CountryCardList from "../../components/country-card-list/country-card-list.component";
 
 import useFetch from "../../utils/useFetch";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "../../components/Spinner";
 
 const regionsArray = [
     { label: "Filter by Region", value: "Filter by Region" },
@@ -39,9 +41,27 @@ export default function Homepage() {
     const whichRegion =
         selectRegion === "Filter by Region" ? "the World" : selectRegion;
 
-    const countries = useFetch(countriesUrl);
+    const {
+        data: countries,
+        isPending,
+        isError,
+        error,
+    } = useQuery({
+        queryKey: ["countries", countriesUrl],
+        queryFn: async () => {
+            const response = await fetch(countriesUrl);
+            if (!response.ok) {
+                console.error("Cannot fetch countries");
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        },
+    });
     console.log("🚀 ~ Homepage ~ countries:", countries);
-    // console.log(countries?.length);
+
+    if (isPending) return <Spinner />;
+    if (isError) return <h1>{error.message}</h1>;
+
     return (
         <HomepageWrapper>
             <FormSection>
@@ -52,30 +72,24 @@ export default function Homepage() {
                 <SelectForm
                     onSelectChange={onSelectChange}
                     region={selectRegion}
-                    regionsarray={regionsArray}
+                    $regionsarray={regionsArray}
                 />
             </FormSection>
 
-            {countries ? (
-                <>
-                    <CountryCount>
-                        There are&nbsp;
-                        {countries?.length} &nbsp;countries in {whichRegion}
-                        &nbsp;
-                        <sup>*</sup>
-                    </CountryCount>
+            <CountryCount>
+                There are&nbsp;
+                {countries?.length} &nbsp;countries in {whichRegion}
+                &nbsp;
+                <sup>*</sup>
+            </CountryCount>
 
-                    <CountryCardList
-                        countries={countries}
-                        inputCountry={inputCountry}
-                        selectRegion={selectRegion}
-                        region={selectRegion}
-                        len={countries.length}
-                    />
-                </>
-            ) : (
-                <h1>Loading...</h1>
-            )}
+            <CountryCardList
+                countries={countries}
+                inputCountry={inputCountry}
+                selectRegion={selectRegion}
+                region={selectRegion}
+                len={countries?.length}
+            />
         </HomepageWrapper>
     );
 }
