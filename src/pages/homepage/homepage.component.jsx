@@ -6,7 +6,6 @@ import SearchForm from "../../components/forms/search-form/search-form.component
 import SelectForm from "../../components/forms/select-region-form/select-region-form.component";
 import CountryCardList from "../../components/country-card-list/country-card-list.component";
 
-import useFetch from "../../utils/useFetch";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../../components/Spinner";
 
@@ -57,8 +56,6 @@ export default function Homepage() {
             return response.json();
         },
     });
-    console.log("🚀 ~ Homepage ~ countries:", countries);
-
     if (isPending) return <Spinner />;
     if (isError) return <h1>{error.message}</h1>;
 

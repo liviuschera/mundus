@@ -9,6 +9,7 @@ import Homepage from "./pages/homepage/homepage.component";
 import Country from "./pages/country/country.component";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Routes } from "react-router-dom/dist/index.js";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -28,13 +29,13 @@ function App() {
                 <ThemeProvider theme={themeConfig}>
                     <GlobalStyle darkTheme={theme} />
                     <Header />
-                    <Route exact path="/">
-                        <Homepage />
-                    </Route>
-                    <Route
-                        path={`/country/:countryDetails`}
-                        render={(routerProps) => <Country {...routerProps} />}
-                    />
+                    <Routes>
+                        <Route index element={<Homepage />} />
+                        <Route
+                            path={`/country/:countryDetails`}
+                            element={<Country />}
+                        />
+                    </Routes>
                 </ThemeProvider>
             </ThemeContext.Provider>
         </QueryClientProvider>

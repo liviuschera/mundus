@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
 import {
     PageWrapper,
     CountryWrapper,
@@ -19,18 +17,19 @@ import {
     listItems,
     displayBorderLinks,
 } from "./country.utils";
-import useFetch from "../../utils/useFetch";
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../../components/Spinner";
+import { useNavigate } from "react-router-dom/dist";
+import { useLocation } from "react-router-dom/dist";
 
-export default function Country({ ...params }) {
-    const history = useHistory();
-    const [isHovering, setIsHovering] = useState(false);
-    const country = params.location.state.country;
-    console.log("🚀 ~ Country ~ country:", country);
-    const filteredCountries = params.location.state.filteredCountries;
+export default function Country() {
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const country = location.state.country;
+    const filteredCountries = location.state.filteredCountries;
     const countryNativeName = Object.entries(country.name.nativeName)[0][1]
         .official;
     const borderCountries = makeArryOfBorderCountries(
@@ -60,16 +59,9 @@ export default function Country({ ...params }) {
         },
     });
 
-    // const countryImages = useFetch(
-    //     `https://pixabay.com/api/?key=${
-    //         // process.env.REACT_APP_PIXABAY_API_KEY
-    //         import.meta.env.VITE_PIXABAY_API_KEY
-    //     }&q=${encodeURIComponent(searchTerm)}&image_type=photo`
-    // );
-
     return (
         <PageWrapper>
-            <CustomLink as="button" onClick={() => history.goBack()} $button>
+            <CustomLink as="button" onClick={() => navigate(-1)} $button>
                 <span>&larr;</span> Back
             </CustomLink>
             <CountryWrapper>

@@ -32,12 +32,10 @@ export function displayBorderLinks(borderCountries, filteredCountries) {
         return (
             <CustomLink
                 key={borderCountry?.name?.common}
-                to={{
-                    pathname: `/country/${borderCountry.name.common
-                        .toLowerCase()
-                        .replace(/\s/g, "-")}`,
-                    state: { country: borderCountry, filteredCountries },
-                }}
+                to={`/country/${borderCountry.name.common
+                    .toLowerCase()
+                    .replace(/\s/g, "-")}`}
+                state={{ country: borderCountry, filteredCountries }}
             >
                 {borderCountry.name.common.replace(/\(.+?\)/, "")}
             </CustomLink>

@@ -5,10 +5,6 @@ import { FormWrapper } from "./select-region-form.styles";
 import Select from "../select/select.component";
 
 export default function SelectForm({ onSelectChange, region, $regionsarray }) {
-    console.log(
-        "hello from select form. showing regionsArray: ",
-        $regionsarray
-    );
     return (
         <FormWrapper>
             <Select

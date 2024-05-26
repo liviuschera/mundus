@@ -8,11 +8,11 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
-  <BrowserRouter>
     <React.StrictMode>
-      <App />
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
     </React.StrictMode>
-  </BrowserRouter>
 );
 
 // If you want your app to work offline and load faster, you can change
